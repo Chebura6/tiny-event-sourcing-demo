@@ -3,12 +3,14 @@ package ru.quipy.projections
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import ru.quipy.api.NewTaskCreatedEvent
-import ru.quipy.api.TaskUpdatedEvent
-import ru.quipy.api.ExecutorsAssignedEvent
+import ru.quipy.api.*
+import ru.quipy.streams.annotation.AggregateSubscriber
 import ru.quipy.streams.annotation.SubscribeEvent
 
 @Component
+@AggregateSubscriber(
+    aggregateClass = TaskAggregate::class, subscriberName = "demo-subs-stream-1"
+)
 class AnnotationBasedTaskEventsSubscriber {
 
     private val logger: Logger = LoggerFactory.getLogger(AnnotationBasedTaskEventsSubscriber::class.java)
