@@ -4,11 +4,21 @@ import org.springframework.web.bind.annotation.*
 import ru.quipy.api.TaskAggregate
 import ru.quipy.api.TaskStatus
 import ru.quipy.logic.TaskAggregateCommands
+import ru.quipy.repository.ProjectProjectionRepository
+import ru.quipy.repository.StatusProjectionRepository
+import ru.quipy.repository.TaskProjectionRepository
+import ru.quipy.service.ProjectionsService
 import java.util.UUID
 
 @RestController
 @RequestMapping("/tasks")
-class TaskController(private val taskCommands: TaskAggregateCommands) {
+class TaskController(
+    private val taskCommands: TaskAggregateCommands,
+    val projectionsService: ProjectionsService,
+    val taskProjectionRepository: TaskProjectionRepository,
+    val statusProjectionRepository: StatusProjectionRepository,
+    val projectProjectionRepository: ProjectProjectionRepository
+) {
 
     @PostMapping
     fun createTask(

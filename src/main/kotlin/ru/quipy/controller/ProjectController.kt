@@ -13,12 +13,16 @@ import ru.quipy.core.EventSourcingService
 import ru.quipy.logic.ProjectAggregateState
 import ru.quipy.logic.addTask
 import ru.quipy.logic.create
+import ru.quipy.repository.ProjectProjectionRepository
+import ru.quipy.service.ProjectionsService
 import java.util.*
 
 @RestController
 @RequestMapping("/projects")
 class ProjectController(
-    val projectEsService: EventSourcingService<UUID, ProjectAggregate, ProjectAggregateState>
+    val projectEsService: EventSourcingService<UUID, ProjectAggregate, ProjectAggregateState>,
+    val projectProjectionRepository: ProjectProjectionRepository,
+    val projectionsService: ProjectionsService,
 ) {
 
     @PostMapping("/{projectTitle}")
